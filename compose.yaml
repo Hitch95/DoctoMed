@@ -1,0 +1,22 @@
+services:
+  db:
+    image: mysql:5.7
+    restart: on-failure
+    environment:
+      MYSQL_DATABASE: 'salutem'
+      MYSQL_USER: 'salutem'
+      MYSQL_PASSWORD: 'salutem'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+  adminer:
+    image: adminer
+    restart: on-failure
+    ports:
+      - '8080:8080'
+volumes:
+  mysql-data:
