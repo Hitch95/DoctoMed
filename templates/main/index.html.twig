@@ -1,20 +1,128 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}
+    {{ parent() }}
+    - Accueil
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <section class="home-top">
+        <article class="container">
+            <h1>Salutem</h1>
+            <h2>Maison de santé</h2>
+            <a href="#appointment" class="btn btn-dark">Prendre rendez-vous</a>
+        </article>
+    </section>
+    <section class="home-boxes">
+        <div class="container">
+            <article>
+                <h3>Centre médicale</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, debitis delectus dolorem, est eveniet ex explicabo id iure iusto magni maiores nam non numquam odio officiis quaerat reiciendis repellat totam.</p>
+                <a href="#" class="btn btn-light">Lire la suite</a>
+            </article>
+            <article>
+                <h3>Horaires d'ouverture</h3>
+                <table class="opening-hours">
+                    <tr>
+                        <td>Lundi</td>
+                        <td class="hours">9h - 17h</td>
+                    </tr>
+                    <tr class="today">
+                        <td>Mardi</td>
+                        <td class="hours">9h - 17h</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td>
+                        <td class="hours">9h - 17h</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td>
+                        <td class="hours">9h - 17h</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td>
+                        <td class="hours">9h - 17h</td>
+                    </tr>
+                    <tr>
+                        <td>Samedi</td>
+                        <td class="hours">9h - 12h</td>
+                    </tr>
+                    <tr>
+                        <td>Dimanche</td>
+                        <td class="hours">Fermé</td>
+                    </tr>
+                </table>
+            </article>
+            <article>
+                <h3>Numéro d'urgence</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci assumenda aut delectus dolores illo laboriosam provident reiciendis tempore vel?</p>
+                <p>
+                    <a href="tel:0243785443" class="phone-number">0243785443</a>
+                </p>
+                <a href="#" class="btn btn-light">Lire la suite</a>
+            </article>
+        </div>
+    </section>
 
-<div class="example-wrapper">
-    <h1>Hello Bahloul! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/bahloul/code/ESGI/Symfony/Salutem/salutem/src/Controller/MainController.php</code></li>
-        <li>Your template at <code>/home/bahloul/code/ESGI/Symfony/Salutem/salutem/templates/main/index.html.twig</code></li>
-    </ul>
-</div>
+    <section class="doctors">
+        <div class="container">
+            <article>
+                <form class="form-appointment">
+                    <h3>Prendre rendez-vous</h3>
+                    <input type="text" required placeholder="Nom">
+                    <input type="text" required placeholder="Prénom">
+                    <input type="email" placeholder="Email">
+                    <input type="tel" required placeholder="Téléphone">
+                    <input type="date" required placeholder="Date">
+                    <input type="time" step="900" required placeholder="Heure">
+                    <select required >
+                        <option disabled selected>Choisissez une spécialité</option>
+                        <option>Médecin Généraliste</option>
+                        <option>Dentiste</option>
+                        <option>Infirmier</option>
+                        <option>Homéopathe</option>
+                        <option>Osthéopathe</option>
+                    </select>
+                    <textarea placeholder="Votre message"></textarea>
+                    <button type="submit" class="btn btn-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
+                        Envoyer
+                    </button>
+                </form>
+            </article>
+            <article class="doctor-thumbnail">
+                <img src="uploads/doctor-1.jpg" alt="Jack Smith">
+                <div class="doctor-details">
+                    <h4>Jack Smith</h4>
+                    <p>Homéopathe / Ostéopathe</p>
+                    <a href="#" class="btn btn-dark">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
+                        Plus d'informations
+                    </a>
+                </div>
+            </article>
+            <article class="doctor-thumbnail">
+                <img src="uploads/doctor-2.jpg" alt="Norma Pedric">
+                <div class="doctor-details">
+                    <h4>Norma Pedric</h4>
+                    <p>Médecin Généraliste</p>
+                    <a href="#" class="btn btn-dark">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
+                        Plus d'informations
+                    </a>
+                </div>
+            </article>
+            <article class="doctor-thumbnail">
+                <img src="uploads/doctor-3.jpg" alt="Maria Martin">
+                <div class="doctor-details">
+                    <h4>Maria Martin</h4>
+                    <p>Dentiste</p>
+                    <a href="#" class="btn btn-dark">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
+                        Plus d'informations
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
 {% endblock %}
