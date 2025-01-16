@@ -6,6 +6,7 @@ use App\Repository\HealthcareCenterRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: HealthcareCenterRepository::class)]
 class HealthcareCenter
@@ -19,6 +20,7 @@ class HealthcareCenter
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Slug(fields: ['name'])]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
@@ -46,13 +48,13 @@ class HealthcareCenter
      * @var Collection<int, Appointment>
      */
     #[ORM\OneToMany(targetEntity: Appointment::class, mappedBy: 'healthcareCenter', orphanRemoval: true)]
-    private Collection $yes;
+    private Collection $appointments;
 
     public function __construct()
     {
         $this->doctors = new ArrayCollection();
         $this->openingHours = new ArrayCollection();
-        $this->yes = new ArrayCollection();
+        $this->appointments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -183,27 +185,27 @@ class HealthcareCenter
     /**
      * @return Collection<int, Appointment>
      */
-    public function getYes(): Collection
+    public function getAppointments(): Collection
     {
-        return $this->yes;
+        return $this->appointments;
     }
 
-    public function addYe(Appointment $ye): static
+    public function addAppointment(Appointment $appointment): static
     {
-        if (!$this->yes->contains($ye)) {
-            $this->yes->add($ye);
-            $ye->setHealthcareCenter($this);
+        if (!$this->appointments->contains($appointment)) {
+            $this->appointments->add($appointment);
+            $appointment->setHealthcareCenter($this);
         }
 
         return $this;
     }
 
-    public function removeYe(Appointment $ye): static
+    public function removeAppointment(Appointment $appointment): static
     {
-        if ($this->yes->removeElement($ye)) {
+        if ($this->appointments->removeElement($appointment)) {
             // set the owning side to null (unless already changed)
-            if ($ye->getHealthcareCenter() === $this) {
-                $ye->setHealthcareCenter(null);
+            if ($appointment->getHealthcareCenter() === $this) {
+                $appointment->setHealthcareCenter(null);
             }
         }
 

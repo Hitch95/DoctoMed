@@ -30,6 +30,19 @@ class OpeningHour
     #[ORM\JoinColumn(nullable: false)]
     private ?HealthcareCenter $healthcareCenter = null;
 
+    public function getFormattedTime(): string
+    {
+        if ($this->getOpeningTime() === null || $this->getClosingTime() === null) {
+            return 'Fermé';
+        }
+        return $this->getOpeningTime()->format('G') . 'h - ' . $this->getClosingTime()->format('G') . 'h';
+    }
+
+    public function isToday(): bool
+    {
+        return $this->getWeekdayNumber() === (int) (new \DateTime())->format('N');
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

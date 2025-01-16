@@ -16,6 +16,19 @@ class HealthcareCenterRepository extends ServiceEntityRepository
         parent::__construct($registry, HealthcareCenter::class);
     }
 
+    public function findOneWithDoctors(string $slug)
+    {
+        return $this->createQueryBuilder('hc')
+            ->addSelect('d')
+            ->addSelect('s')
+            ->leftJoin('hc.doctors', 'd')
+            ->leftJoin('d.skills', 's')
+            ->andWhere('hc.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     //    /**
     //     * @return HealthcareCenter[] Returns an array of HealthcareCenter objects
     //     */
