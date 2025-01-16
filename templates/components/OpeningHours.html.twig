@@ -1,0 +1,12 @@
+<div{{ attributes }}>
+    <table class="opening-hours">
+        {% for openingHour in this.openingHours %}
+            <tr class="{{ openingHour.today ? 'today' }}">
+                <td>{{ openingHour.weekday }}</td>
+                <td class="hours">
+                    {{ openingHour.formattedTime }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>

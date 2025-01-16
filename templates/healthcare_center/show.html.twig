@@ -27,15 +27,7 @@
             
             <article>
                 <h3>Horaires d'ouverture</h3>
-                <table class="opening-hours">
-                    {% for openingHour in healthcare_center.openingHours %}
-                    <tr class="{{ openingHour.today ? 'today' : ''}}">
-                        <td>{{ openingHour.weekday }}</td>
-                        <td class="hours">
-                            {{ openingHour.formattedTime }}
-                        </td>
-                    </tr>
-                    {% endfor %}
+                    <twig:OpeningHours/>
                 </table>
             </article>
 
