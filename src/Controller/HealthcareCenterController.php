@@ -33,7 +33,9 @@ final class HealthcareCenterController extends AbstractController
         $requestStack->getSession()->set('healthcare_center_id', $healthcareCenter->getId());
 
         $appointment = new Appointment();
-        $form = $this->createForm(AppointmentType::class, $appointment);
+        $form = $this->createForm(AppointmentType::class, $appointment, [
+            'healthcare_center' => $healthcareCenter,
+        ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

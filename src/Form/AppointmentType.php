@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Appointment;
 use App\Entity\Skill;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -15,17 +17,35 @@ class AppointmentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $healthcareCenter = $options['healthcare_center'];
+
         $builder
-            ->add('firstName')
-            ->add('lastName')
+            ->add('firstName', null, [
+                'label' => 'Prénom',
+            ])
+            ->add('lastName', null, [
+                'label' => 'Nom',
+            ])
             ->add('email', EmailType::class)
-            ->add('phone', TelType::class)
-            ->add('startAt')
-            ->add('message')
+            ->add('phone', TelType::class, [
+                'label' => 'Téléphone',
+            ])
+            ->add('startAt', null, [
+                'label' => 'Date et heure',
+            ])
             ->add('skill', EntityType::class, [
                 'class' => Skill::class,
+                'query_builder' => function (EntityRepository $er) use ($healthcareCenter): QueryBuilder {
+                    return $er->createQueryBuilder('s')
+                        ->join('s.doctors', 'd')
+                        ->where('d.healthcareCenter = :healthcareCenter')
+                        ->orderBy('s.name', 'ASC')
+                        ->setParameter('healthcareCenter', $healthcareCenter);
+                },
                 'choice_label' => 'name',
+                'label' => 'Spécialité',
             ])
+            ->add('message')
         ;
     }
 
@@ -33,6 +53,7 @@ class AppointmentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Appointment::class,
+            'healthcare_center' => null,
         ]);
     }
 }
