@@ -1,3 +1,4 @@
+{% set current_path = app.request.get('_route') %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,7 +17,23 @@
 </head>
 <body>
 
-{% block body %}{% endblock %}
+<div class="container mt-3">
+    <div class="row">
+        <aside class="col-md-3">
+            <div class="list-group">
+                <a href="{{ path('app_admin_dashboard') }}" class="list-group-item list-group-item-action {{ current_path == 'app_admin_dashboard' ? 'active' }}">
+                    Dashboard
+                </a>
+                <a href="{{ path('app_admin_skill_index') }}" class="list-group-item list-group-item-action {{ current_path starts with 'app_admin_skill_' ? 'active' }}">
+                    Compétences
+                </a>
+            </div>
+        </aside>
+        <main class="col-md-9">
+            {% block body %}{% endblock %}
+        </main>
+    </div>
+</div>
 
 </body>
 </html>
