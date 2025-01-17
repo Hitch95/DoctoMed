@@ -32,6 +32,9 @@ class AppointmentType extends AbstractType
             ])
             ->add('startAt', null, [
                 'label' => 'Date et heure',
+                'attr' => [
+                    'min' => (new \DateTime())->format('Y-m-d\TH:i'),
+                ],
             ])
             ->add('skill', EntityType::class, [
                 'class' => Skill::class,
