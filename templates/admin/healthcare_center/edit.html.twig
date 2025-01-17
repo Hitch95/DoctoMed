@@ -1,0 +1,13 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Edit HealthcareCenter{% endblock %}
+
+{% block body %}
+    <h1>Edit HealthcareCenter</h1>
+
+    {{ include('admin/healthcare_center/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_admin_healthcare_center_index') }}">back to list</a>
+
+    {{ include('admin/healthcare_center/_delete_form.html.twig') }}
+{% endblock %}

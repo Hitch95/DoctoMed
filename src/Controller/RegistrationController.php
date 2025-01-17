@@ -22,7 +22,7 @@ class RegistrationController extends AbstractController
     public function __construct(private EmailVerifier $emailVerifier)
     {
     }
-    
+
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager): Response
     {
@@ -50,8 +50,8 @@ class RegistrationController extends AbstractController
             );
 
             // do anything else you need here, like send an email
+            $this->addFlash('success', 'Your account has been created. Please check your email for a verification link.');
 
-            // TODO: Retirer les 2 derniers arguments de la méthode login() ci-dessous
             return $security->login($user);
         }
 
@@ -63,9 +63,6 @@ class RegistrationController extends AbstractController
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, UserRepository $userRepository): Response
     {
-        // TODO: Commenter la ligne ci-dessous sinon, on ne peut pas valider son email sans être connecté
-        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
         $id = $request->query->get('id'); // retrieve the user id from the url
 
         if (null === $id) {
@@ -88,7 +85,6 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('app_login');

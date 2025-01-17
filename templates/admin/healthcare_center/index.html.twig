@@ -1,0 +1,44 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}HealthcareCenter index{% endblock %}
+
+{% block body %}
+    <h1>HealthcareCenter index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Phone</th>
+                <th>PhoneEmergency</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for healthcare_center in healthcare_centers %}
+            <tr>
+                <td>{{ healthcare_center.id }}</td>
+                <td>{{ healthcare_center.name }}</td>
+                <td>{{ healthcare_center.slug }}</td>
+                <td>{{ healthcare_center.phone }}</td>
+                <td>{{ healthcare_center.phoneEmergency }}</td>
+                <td>{{ healthcare_center.email }}</td>
+                <td>
+                    <a href="{{ path('app_admin_healthcare_center_show', {'id': healthcare_center.id}) }}">show</a>
+                    <a href="{{ path('app_admin_healthcare_center_edit', {'id': healthcare_center.id}) }}">edit</a>
+                    <a href="{{ path('app_healthcarecenter_show', {'slug': healthcare_center.slug}) }}">open</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_healthcare_center_new') }}">Create new</a>
+{% endblock %}

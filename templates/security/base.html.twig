@@ -22,6 +22,15 @@
 
 <main class="security">
     <div class="security-form-container">
+
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         {% block body %}{% endblock %}
     </div>
 </main>
