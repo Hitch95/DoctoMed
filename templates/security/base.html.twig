@@ -8,6 +8,15 @@
     <title>
         {% block title %}Salutem{% endblock %}
     </title>
+
+    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
+
+    {% block stylesheets %}
+    {% endblock %}
+
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
 </head>
 <body>
 
