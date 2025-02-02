@@ -68,11 +68,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return list<string>
      */
+
+    public const ROLE_ADMIN = 'ROLE_ADMIN';
+    public const ROLE_MANAGER = 'ROLE_MANAGER';
+    public const ROLE_USER = 'ROLE_USER';
+
     public function getRoles(): array
     {
+        // Start with existing roles from database
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+
+        // Add ROLE_USER only if not already present
+        if (!in_array(self::ROLE_USER, $roles)) {
+            $roles[] = self::ROLE_USER;
+        }
 
         return array_unique($roles);
     }
