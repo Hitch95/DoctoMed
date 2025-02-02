@@ -50,11 +50,19 @@ class HealthcareCenter
     #[ORM\OneToMany(targetEntity: Appointment::class, mappedBy: 'healthcareCenter', orphanRemoval: true)]
     private Collection $appointments;
 
+    #[ORM\OneToMany(
+        targetEntity: User::class,
+        mappedBy: 'healthcareCenter',
+        cascade: ['persist']
+    )]
+    private Collection $managers;
+
     public function __construct()
     {
         $this->doctors = new ArrayCollection();
         $this->openingHours = new ArrayCollection();
         $this->appointments = new ArrayCollection();
+        $this->managers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -206,6 +214,32 @@ class HealthcareCenter
             // set the owning side to null (unless already changed)
             if ($appointment->getHealthcareCenter() === $this) {
                 $appointment->setHealthcareCenter(null);
+            }
+        }
+
+        return $this;
+    }
+
+    // Role Manager part.
+    public function getManagers(): Collection
+    {
+        return $this->managers;
+    }
+
+    public function addManager(User $manager): static
+    {
+        if (!$this->managers->contains($manager)) {
+            $this->managers[] = $manager;
+            $manager->setHealthcareCenter($this);
+        }
+        return $this;
+    }
+
+    public function removeManager(User $manager): static
+    {
+        if ($this->managers->removeElement($manager)) {
+            if ($manager->getHealthcareCenter() === $this) {
+                $manager->setHealthcareCenter(null);
             }
         }
 

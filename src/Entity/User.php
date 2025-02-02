@@ -28,13 +28,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var string|null The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
 
     #[ORM\Column]
     private bool $isVerified = false;
+
+    #[ORM\ManyToOne(
+        targetEntity: HealthcareCenter::class,
+        inversedBy: 'managers',
+    )]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?HealthcareCenter $healthcareCenter = null;
 
     public function getId(): ?int
     {
@@ -91,8 +98,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function setRoles(array $roles): static
     {
-        $this->roles = $roles;
-
+        $this->roles = array_unique(array_map('mb_strtoupper', $roles));
         return $this;
     }
 
@@ -130,5 +136,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->isVerified = $isVerified;
 
         return $this;
+    }
+
+    // Manager Part
+    public function getHealthcareCenter(): ?HealthcareCenter
+    {
+        return $this->healthcareCenter;
+    }
+
+    public function setHealthcareCenter(?HealthcareCenter $healthcareCenter): static
+    {
+        $this->healthcareCenter = $healthcareCenter;
+
+        return $this;
+    }
+
+    public function isManagerOf(HealthcareCenter $healthcareCenter): bool
+    {
+        return $this->healthcareCenter && $this->healthcareCenter->getId() === $healthcareCenter->getId();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\HealthcareCenter;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -11,8 +12,7 @@ class UserFixtures extends Fixture
 {
 
     public function __construct(private readonly UserPasswordHasherInterface $hasher)
-    {
-    }
+    {}
 
     public function load(ObjectManager $manager): void
     {
@@ -30,6 +30,10 @@ class UserFixtures extends Fixture
         $managerUser->setRoles([User::ROLE_MANAGER]);
         $managerUser->setPassword($this->hasher->hashPassword($managerUser, '1234'));
         $managerUser->setIsVerified(true);
+
+        // Get the "Cabinet des Acacias" healthcare center reference
+        $healthcareCenterAcacias = $this->getReference('healthcare_center_acacias', HealthcareCenter::class);
+        $managerUser->setHealthcareCenter($healthcareCenterAcacias);
         $manager->persist($managerUser);
 
         // User

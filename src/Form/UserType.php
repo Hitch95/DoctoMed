@@ -24,8 +24,6 @@ class UserType extends AbstractType
                 'expanded' => true,
                 'label' => 'Roles',
             ])
-            ->add('password')
-            ->add('isVerified')
         ;
     }
 
