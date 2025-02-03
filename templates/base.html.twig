@@ -16,6 +16,14 @@
 
     {% include 'layout/_header.html.twig' with {healthcare_center_name: block('healthcare_center_name')} %}
 
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     {% include 'layout/_nav.html.twig' %}
 
     <main>

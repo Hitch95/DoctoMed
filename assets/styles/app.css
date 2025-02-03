@@ -69,7 +69,7 @@ form select {
     color: white;
 }
 
-.header-top>.container {
+.header-top > .container {
     display: flex;
     justify-content: space-between;
 }
@@ -107,7 +107,7 @@ form select {
     padding: 1em 0;
 }
 
-.header-middle>.container {
+.header-middle > .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -179,7 +179,7 @@ form select {
     background-size: cover;
 }
 
-.home-top>.container {
+.home-top > .container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -202,12 +202,12 @@ footer.main-footer {
     color: #777777;
 }
 
-footer.main-footer>.container {
+footer.main-footer > .container {
     display: flex;
     padding: 1em;
 }
 
-footer.main-footer>.container>* {
+footer.main-footer > .container > * {
     flex: 1;
 }
 
@@ -270,18 +270,18 @@ footer.main-footer table.opening-hours tr td.hours {
     margin-top: -70px;
 }
 
-.home-boxes>.container {
+.home-boxes > .container {
     display: flex;
 }
 
-.home-boxes>.container>* {
+.home-boxes > .container > * {
     flex: 1;
     padding: 1em;
     background-color: #00547e;
     color: white;
 }
 
-.home-boxes>.container>*:nth-child(even) {
+.home-boxes > .container > *:nth-child(even) {
     background-color: #00b3cc;
 }
 
@@ -322,7 +322,7 @@ footer.main-footer table.opening-hours tr td.hours {
     margin: 1em 0;
 }
 
-.doctors>.container {
+.doctors > .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-column-gap: 1em;
@@ -368,20 +368,61 @@ footer.main-footer table.opening-hours tr td.hours {
     margin-bottom: 0;
 }
 
+.security {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f7f7f7;
+}
+
+.security .security-form-container {
+    min-width: min(80%, 400px);
+    padding: 1rem;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.security .security-form-container .btn {
+    color: black;
+}
+
+.security .security-form-container .form-check {
+    display: flex;
+}
+
+.security .security-form-container .form-check [type="checkbox"] {
+    width: auto;
+}
+
+.flashes {
+    padding: 1rem 0;
+}
+
+.flash {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+
+.flash.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
 @media only screen and (max-width: 991px) {
     .container {
         width: 100%;
     }
-
-    .home-boxes>.container {
+    .home-boxes > .container {
         flex-direction: column;
     }
-
-    footer.main-footer>.container {
+    footer.main-footer > .container {
         flex-direction: column;
     }
-
-    .doctors>.container {
+    .doctors > .container {
         grid-template-columns: 1fr;
     }
 }
