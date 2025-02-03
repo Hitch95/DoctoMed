@@ -1,0 +1,1 @@
+{"version":1,"defects":{"App\\Tests\\DoctorTest::testFullNameUppercase":3,"App\\Tests\\DoctorTest::testFullName":3,"App\\Tests\\HealthcareCenterTest::testSomething":3},"times":{"App\\Tests\\DoctorTest::testFullName":0.002,"App\\Tests\\DoctorTest::testFullNameUppercase":0,"App\\Tests\\SkillTest::testCreateSkill":0.005,"App\\Tests\\HealthcareCenterTest::testSomething":0.159}}

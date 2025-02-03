@@ -2,32 +2,47 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\QueryParameter;
 use App\Repository\DoctorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: DoctorRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['doctor:read']],
+)]
+#[ApiFilter(SearchFilter::class, properties: ['firstName' => 'ipartial', 'lastName' => 'ipartial'])]
+#[QueryParameter(key: 'firstname', filter: SearchFilter::class)]
 class Doctor
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['doctor:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['doctor:read'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['doctor:read'])]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['doctor:read'])]
     private ?string $photo = null;
 
     /**
      * @var Collection<int, Skill>
      */
     #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'doctors')]
+    #[Groups(['doctor:read'])]
     private Collection $skills;
 
     #[ORM\ManyToOne(inversedBy: 'doctors')]
@@ -70,7 +85,7 @@ class Doctor
 
     public function getLastName(): ?string
     {
-        return $this->lastName;
+        return strtoupper($this->lastName);
     }
 
     public function setLastName(string $lastName): static
@@ -93,7 +108,7 @@ class Doctor
     }
 
     /**
-     * @return Collection<int, Skill>
+     * @return Skill[]
      */
     public function getSkills(): Collection
     {
