@@ -70,7 +70,7 @@ class Doctor
 
     public function getLastName(): ?string
     {
-        return $this->lastName;
+        return strtoupper($this->lastName);
     }
 
     public function setLastName(string $lastName): static

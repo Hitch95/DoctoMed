@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Appointment;
+use App\Entity\HealthcareCenter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,6 +15,17 @@ class AppointmentRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Appointment::class);
+    }
+
+    public function findByHealthcareCenter(HealthcareCenter $healthcareCenter): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.healthcareCenter = :center')
+            ->setParameter('center', $healthcareCenter)
+            ->orderBy('a.startAt', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
     }
 
     //    /**

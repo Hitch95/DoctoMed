@@ -12,6 +12,7 @@
                 <th>FirstName</th>
                 <th>LastName</th>
                 <th>Photo</th>
+                <th>Centre de santé</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ doctor.firstName }}</td>
                 <td>{{ doctor.lastName }}</td>
                 <td>{{ doctor.photo }}</td>
+                <td>{{ doctor.healthcareCenter ? doctor.healthcareCenter.name : 'N/A' }}</td>
                 <td>
                     <a href="{{ path('app_admin_doctor_show', {'id': doctor.id}) }}">show</a>
                     <a href="{{ path('app_admin_doctor_edit', {'id': doctor.id}) }}">edit</a>
@@ -29,7 +31,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

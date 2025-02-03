@@ -1,0 +1,29 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+    <h2>Appointment Details</h2>
+
+    <dl class="row">
+        <dt class="col-sm-3">Patient</dt>
+        <dd class="col-sm-9">{{ appointment.firstName }} {{ appointment.lastName }}</dd>
+
+        <dt class="col-sm-3">Date/Time</dt>
+        <dd class="col-sm-9">{{ appointment.startAt|format_datetime('medium', 'short') }}</dd>
+
+        <dt class="col-sm-3">Doctor</dt>
+        <dd class="col-sm-9">{{ appointment.doctor ? appointment.doctor.fullName : 'Not assigned' }}</dd>
+
+        <dt class="col-sm-3">Specialty</dt>
+        <dd class="col-sm-9">{{ appointment.skill.name }}</dd>
+
+        <dt class="col-sm-3">Contact</dt>
+        <dd class="col-sm-9">
+            {{ appointment.email }}<br>
+            {{ appointment.phone }}
+        </dd>
+    </dl>
+
+    <a href="{{ path('app_admin_appointment_index') }}" class="btn btn-secondary">
+        Back to list
+    </a>
+{% endblock %}

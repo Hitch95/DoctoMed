@@ -30,6 +30,7 @@ class DoctorType extends AbstractType
             ->add('healthcareCenter', EntityType::class, [
                 'class' => HealthcareCenter::class,
                 'choice_label' => 'name',
+                'required' => false,
             ])
         ;
     }

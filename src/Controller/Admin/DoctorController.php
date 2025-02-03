@@ -24,6 +24,7 @@ final class DoctorController extends AbstractController
         ]);
     }
 
+    // Add a new Doctor
     #[Route('/new', name: 'app_admin_doctor_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
@@ -50,6 +51,7 @@ final class DoctorController extends AbstractController
         ]);
     }
 
+    // Show Doctor
     #[Route('/{id}', name: 'app_admin_doctor_show', methods: ['GET'])]
     public function show(Doctor $doctor): Response
     {
@@ -58,6 +60,7 @@ final class DoctorController extends AbstractController
         ]);
     }
 
+    // Edit Doctor
     #[Route('/{id}/edit', name: 'app_admin_doctor_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Doctor $doctor, EntityManagerInterface $entityManager): Response
     {
@@ -65,6 +68,10 @@ final class DoctorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Get the HealthcareCenter from the form data
+            $healthcareCenter = $form->get('healthcareCenter')->getData();
+            // Set the HealthcareCenter for the doctor
+            $doctor->setHealthcareCenter($healthcareCenter);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_doctor_index', [], Response::HTTP_SEE_OTHER);
@@ -76,6 +83,7 @@ final class DoctorController extends AbstractController
         ]);
     }
 
+    // Delete Doctor
     #[Route('/{id}', name: 'app_admin_doctor_delete', methods: ['POST'])]
     public function delete(Request $request, Doctor $doctor, EntityManagerInterface $entityManager): Response
     {

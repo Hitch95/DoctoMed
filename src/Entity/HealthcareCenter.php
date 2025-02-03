@@ -221,6 +221,9 @@ class HealthcareCenter
     }
 
     // Role Manager part.
+    /**
+     * @return Collection<int, User>
+     */
     public function getManagers(): Collection
     {
         return $this->managers;
@@ -242,7 +245,6 @@ class HealthcareCenter
                 $manager->setHealthcareCenter(null);
             }
         }
-
         return $this;
     }
 }

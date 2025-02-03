@@ -14,16 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/skill')]
 final class SkillController extends AbstractController
 {
-/*************  ✨ Codeium Command ⭐  *************/
-    /**
-     * @return Response
-     */
-    ///**
-    // * Lists all Skill entities.
-    // *
-    // * @return Response
-    // */
-/******  20772854-b59e-43f3-b0a3-d75bcab26fb7  *******/    #[Route(name: 'app_admin_skill_index', methods: ['GET'])]
+    #[Route(name: 'app_admin_skill_index', methods: ['GET'])]
     public function index(SkillRepository $skillRepository): Response
     {
         return $this->render('admin/skill/index.html.twig', [
