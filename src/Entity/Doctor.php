@@ -136,6 +136,12 @@ class Doctor
         return $this->appointments;
     }
 
+    public function setAppointments(Collection $appointments): static
+    {
+        $this->appointments = $appointments;
+        return $this;
+    }
+
     public function addAppointment(Appointment $appointment): static
     {
         if (!$this->appointments->contains($appointment)) {

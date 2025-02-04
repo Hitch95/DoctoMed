@@ -163,6 +163,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isManagerOf(HealthcareCenter $healthcareCenter): bool
     {
-        return $this->healthcareCenter && $this->healthcareCenter->getId() === $healthcareCenter->getId();
+        return $this->healthcareCenter !== null && $this->healthcareCenter->getId() === $healthcareCenter->getId();
     }
 }

@@ -26,19 +26,21 @@ class DoctorType extends AbstractType
                 'class' => Skill::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-            ])
-            ->add('healthcareCenter', EntityType::class, [
+            ]);
+
+        if ($options['is_admin']) {
+            $builder->add('healthcareCenter', EntityType::class, [
                 'class' => HealthcareCenter::class,
                 'choice_label' => 'name',
-                'required' => false,
-            ])
-        ;
+            ]);
+        };
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Doctor::class,
+            'is_admin' => false
         ]);
     }
 }

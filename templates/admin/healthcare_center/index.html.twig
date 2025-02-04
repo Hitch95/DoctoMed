@@ -5,15 +5,15 @@
 {% block body %}
     <h1>HealthcareCenter index</h1>
 
-    <div class="table-responsive"> {# Add responsive wrapper for smaller screens #}
-        <table class="table table-striped table-bordered table-hover"> {# Apply Bootstrap table styles #}
-            <thead class="table-dark"> {# Darker header #}
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
                 <th>Slug</th>
                 <th>Phone</th>
-                <th>Emergency Phone</th> {# More descriptive label #}
+                <th>Emergency Phone</th>
                 <th>Email</th>
                 <th>Doctors</th>
                 <th>Actions</th>
@@ -32,7 +32,7 @@
                         {% for doctor in healthcare_center.doctors %}
                             {{ doctor.firstName }} {{ doctor.lastName }}
                             {% if doctor.skills|length > 0 %}
-                                <span class="badge bg-info text-dark"> {# Use badges for skills #}
+                                <span class="badge bg-info">
                                     {% for skill in doctor.skills %}
                                         {{ skill.name }}{% if not loop.last %}, {% endif %}
                                     {% endfor %}
@@ -40,23 +40,23 @@
                             {% endif %}
                             {% if not loop.last %}<br>{% endif %}
                         {% else %}
-                            <span class="text-muted">No doctors</span> {# Use muted text for "no doctors" #}
+                            <span class="text-muted">No doctors</span>
                         {% endfor %}
                     </td>
                     <td>
-                        <a href="{{ path('app_admin_healthcare_center_show', {'id': healthcare_center.id}) }}" class="btn btn-sm btn-info">Show</a> {# Use buttons #}
+                        <a href="{{ path('app_admin_healthcare_center_show', {'id': healthcare_center.id}) }}" class="btn btn-sm btn-info">Show</a>
                         <a href="{{ path('app_admin_healthcare_center_edit', {'slug': healthcare_center.slug}) }}" class="btn btn-sm btn-primary">Edit</a>
                         <a href="{{ path('app_healthcarecenter_show', {'slug': healthcare_center.slug}) }}" class="btn btn-sm btn-secondary">Open</a>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="8" class="text-center">No records found</td> {# Center the "no records" message #}
+                    <td colspan="8" class="text-center">No records found</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-    </div> {# Close responsive wrapper #}
+    </div>
 
-    <a href="{{ path('app_admin_healthcare_center_new') }}" class="btn btn-success">Create new</a> {# Use button for "Create new" #}
+    <a href="{{ path('app_admin_healthcare_center_new') }}" class="btn btn-success">Create new</a>
 {% endblock %}

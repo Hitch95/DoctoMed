@@ -1,14 +1,14 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block content %}
-    <h2>Edit Appointment</h2>
+{% block body %}
+    <h2>Modifier un rendez-vous</h2>
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <div class="mt-4">
         <button class="btn btn-primary">Update</button>
         <a href="{{ path('app_admin_appointment_index') }}" class="btn btn-secondary">
-            Cancel
+            Annuler
         </a>
     </div>
     {{ form_end(form) }}

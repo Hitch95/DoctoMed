@@ -28,7 +28,7 @@ class AppointmentController extends AbstractController
         $user = $this->getUser();
         $healthcareCenter = $user->getHealthcareCenter();
 
-        if (!$user->isManagerOf($healthcareCenter)) {
+        if (!$user->isManagerOf($healthcareCenter) && !$user->isAdmin()) {
             throw new AccessDeniedException('Access Denied.');
         }
 
@@ -106,7 +106,7 @@ class AppointmentController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        if (!$user->isManagerOf($appointment->getHealthcareCenter())) {
+        if (!$user->isManagerOf($appointment->getHealthcareCenter()) && !$user->isAdmin()) {
             throw new AccessDeniedException('Access Denied.');
         }
     }
